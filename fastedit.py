@@ -66,9 +66,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.set_defaults(method=edit_fasta)
     parser.add_argument("-i", "--input-dir", dest="infasta", required=True, 
-                    help="Path to the input pdf files")
+                    help="Path to the input fasta files")
     parser.add_argument("-o", "--output-dir", dest="outfasta", required=True,
-                    help="Path for the output txt files")
+                    help="Path for the output fasta files")
     parser.add_argument("-t", "--taxon-name", dest="taxon", required=True,
                     help="Name of the taxon")
 
