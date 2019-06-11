@@ -19,9 +19,9 @@ usage: fastedit.py [-h] -i INFASTA -o OUTFASTA -t TAXON
 optional arguments:
   -h, --help            show this help message and exit
   -i INFASTA, --input-dir INFASTA
-                        Path to the input pdf files
+                        Path to the input fasta files
   -o OUTFASTA, --output-dir OUTFASTA
-                        Path for the output txt files
+                        Path for the output fasta files
   -t TAXON, --taxon-name TAXON
                         Name of the taxon
 ```
