@@ -29,6 +29,6 @@ optional arguments:
 
 The program pulls down the taxonomic ID from the ENA. The name of the taxon must be specified through the -t flag. E.g. to modify the sequence IDs for the taxon Mycobacterium tuberculosis you would run
 ```
-python fastedit.py -i /path/to/the/input/fasta/ -o /path/to/the/output/fasta/ -t "mycobacterium tuberculosis"
+python fastedit.py -i /path/to/the/input/fasta -o /path/to/the/output/fasta -t "mycobacterium tuberculosis"
 ```
 If the taxon isn’t found, the program will prompt you to input the taxonomic ID manually through the command line.
