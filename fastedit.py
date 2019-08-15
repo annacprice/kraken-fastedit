@@ -6,11 +6,12 @@ import requests
 import re
 import argparse
 
-#-----------------------------------------------------------------------------------
-def get_taxid(taxon):
 
+def get_taxid(taxon):
+    # fetch the taxonomic ID from the ENA
     response = requests.get("https://www.ebi.ac.uk/ena/data/taxonomy/v1/taxon/scientific-name/{0}".format(taxon))
 
+    # if request is successful print taxID otherwise launch CLI for manually implementing taxID
     if response.status_code == 200:
         data = response.json()
         taxid = data[0]["taxId"]
@@ -22,8 +23,10 @@ def get_taxid(taxon):
         taxid = taxid_manual(answer=None)
 
     return taxid
-#-----------------------------------------------------------------------------------
+
+
 def taxid_manual(answer=None):
+    # CLI interface for manually entering the taxonomic ID
 
     yes = ("yes", "y", "ye")
     no = ("no", "n")
@@ -41,26 +44,29 @@ def taxid_manual(answer=None):
             print("Please enter yes or no:")
 
     return taxid
-#-----------------------------------------------------------------------------------
+
+
 def edit_fasta(infasta, outfasta, taxon, **kwargs):
 
+    # get the taxonomic ID
     taxid = get_taxid(taxon)
-
-
+	
+    # edit the headers in each fasta file 
     for fasta in os.listdir(infasta):
         fileExtension = fasta.split(".")[-1]
         if fileExtension == "fasta":
-            fastFile = infasta + fasta
+            fastFile = infasta + "/" +  fasta
             with open(fastFile) as file:
-                 print("Editing " + fastFile + " and saving to " + outfasta + taxid + "_" + fasta)
+                 print("Editing " + fastFile + " and saving to " + outfasta + "/" + taxid + "_" + fasta)
                  fastData = file.read()
                  fastEdit = re.sub(r"(>.+)",r"\1|kraken:taxid|{0}".format(taxid), fastData)
-                 fastFileN = outfasta + taxid + "_" + fasta
+                 fastFileN = outfasta + "/" + taxid + "_" + fasta
                  fastFileN = open(fastFileN, "w")
                  fastFileN.write(fastEdit)
 
     print("Done.")
-#-----------------------------------------------------------------------------------
+
+
 def main():
 
     parser = argparse.ArgumentParser()
